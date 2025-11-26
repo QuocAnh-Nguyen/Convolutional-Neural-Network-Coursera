@@ -1,1 +1,1 @@
-# This is a repo about my CNN course on Coursera
+# This is a repo about my CNN course on Coursera, that's it!
