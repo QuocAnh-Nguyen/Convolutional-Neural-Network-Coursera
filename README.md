@@ -1,1 +1,1 @@
-# This is a repo about my CNN course on Coursera, that's it!
+# Testing CNN course's model in assignment notebook on local machine
