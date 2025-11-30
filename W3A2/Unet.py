@@ -1,5 +1,4 @@
 # %%
-import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras.layers import (
@@ -9,7 +8,6 @@ from tensorflow.keras.layers import (
     Input,
     Conv2DTranspose,
 )
-from PIL import Image
 import os
 
 
@@ -167,22 +165,16 @@ model_history = unet.fit(train_dataset, epochs=EPOCHS)
 
 # %%
 def show_prediction(num=3):
-    # === FIX: Use 'preprocessed_dataset', not 'dataset' ===
     for image, mask in preprocessed_dataset.take(num):
-        # 1. Add batch dimension: (96, 128, 3) -> (1, 96, 128, 3)
         input_image = tf.expand_dims(image, axis=0)
 
-        # 2. Predict
         pred_mask = unet.predict(input_image)
 
-        # 3. Post-process
         pred_mask = tf.argmax(pred_mask, axis=-1)
         pred_mask = pred_mask[..., tf.newaxis]
 
-        # 4. Remove batch dimension
         pred_mask = pred_mask[0]
 
-        # 5. Plotting
         fig, axs = plt.subplots(1, 3, figsize=(15, 5))
 
         axs[0].set_title("Input Image")
